@@ -20,21 +20,19 @@ class ListIt {
 		private static final String extensiones []= {"yaml","txt","java","cpp","c","html"};
 		
 		private static void isDirectory(File fichero) {
-            File [] listaFicheros = fichero.listFiles(new FilenameFilter() {
-				@Override
-				public boolean accept(File dir, String name) {
-					String extension=FilenameUtils.getExtension(name);
-					return Arrays.asList(extensiones).contains(extension);
-				}
-			});
+            File [] listaFicheros = fichero.listFiles();
             for (int i=0; i<listaFicheros.length; i++) {
             	colaFicheros.add(listaFicheros[i]);
             }              
 		}
 		
 		private static void isArchivo(File fichero) throws IOException {
-			try {	 
-				contadorWords.ContarPalabras(fichero.getPath());
+			try {
+				String extension=FilenameUtils.getExtension(fichero.getPath());
+				if(Arrays.asList(extensiones).contains(extension)) {
+					contadorWords.ContarPalabras(fichero.getPath());
+				}
+			
 
 			}catch (Exception e) {
 				System.out.println("El fichero: "+fichero.getName()+" no se puede abrir");
