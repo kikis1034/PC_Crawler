@@ -1,7 +1,7 @@
 /*
  * ListIt.java
- * Imprime caracter’sticas de ficheros textuales
- * (c) FŽlix R. Rodr’guez, EPCC, Universidad de Extremadura, 2009
+ * Imprime caracterï¿½sticas de ficheros textuales
+ * (c) Fï¿½lix R. Rodrï¿½guez, EPCC, Universidad de Extremadura, 2009
  * http://madiba.unex.es/felix
  */
 
@@ -16,30 +16,30 @@ import org.apache.commons.io.FilenameUtils;
 class ListIt {
 	
 		private static Queue <File> colaFicheros=new ConcurrentLinkedQueue<File>();
-		private static final String extensiones []= {"java","cpp","c","html"};
+		private static FichContPalabras contadorWords=new FichContPalabras();
+		private static final String extensiones []= {"yaml","txt","java","cpp","c","html"};
 		
 		private static void isDirectory(File fichero) {
-            File [] listaFicheros = fichero.listFiles();
+            File [] listaFicheros = fichero.listFiles(new FilenameFilter() {
+				@Override
+				public boolean accept(File dir, String name) {
+					String extension=FilenameUtils.getExtension(name);
+					return Arrays.asList(extensiones).contains(extension);
+				}
+			});
             for (int i=0; i<listaFicheros.length; i++) {
             	colaFicheros.add(listaFicheros[i]);
             }              
 		}
 		
 		private static void isArchivo(File fichero) throws IOException {
-			
-			try {
-			   String extension=FilenameUtils.getExtension(fichero.getPath());
-			   if(Arrays.asList(extensiones).contains(extension)) {  
-		           FileReader fr = new FileReader(fichero);
-		           BufferedReader br = new BufferedReader(fr);
-		           String linea;
-		           while ((linea=br.readLine()) != null)
-		                   System.out.println(linea);   
-			   }
-	        }
-	        catch (FileNotFoundException fnfe) {
-	           System.out.println("Fichero desaparecido en combate  ;-)");
-	        }
+			try {	 
+				contadorWords.ContarPalabras(fichero.getPath());
+
+			}catch (Exception e) {
+				System.out.println("El fichero: "+fichero.getName()+" no se puede abrir");
+			}
+
 		}
         public static void main (String [] args) throws Exception {
                 if (args.length<1) {
@@ -63,6 +63,7 @@ class ListIt {
                 else  {
                 	isArchivo(fichero);
                 }
+                contadorWords.EscribirCuenta("salida.txt");
       }
 }
               
