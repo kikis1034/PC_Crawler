@@ -7,7 +7,7 @@
 
 import java.io.*;
 import java.util.*;
-
+//hola
 public class CargarObjeto {
         public static void main (String args[]) {
                 try {
