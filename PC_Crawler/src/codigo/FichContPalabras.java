@@ -7,6 +7,7 @@ package codigo;
  */
 
 import java.io.*;
+import java.text.Normalizer;
 import java.util.*;
 
 public class FichContPalabras {
@@ -20,9 +21,9 @@ public class FichContPalabras {
 		public void ContarPalabras(String ficheroEntrada) throws IOException {
             BufferedReader br = new BufferedReader (new FileReader (ficheroEntrada));
             String linea;
-
-            while ( (linea = br.readLine () ) != null) {
-                    StringTokenizer st = new StringTokenizer (linea,", .!¡?¿\"123456789-/_[]{#}&%$ç+*><-_;':|~½¬=()\t\n"); 
+            
+            while ( (linea = limpiarCadena(br.readLine ().toLowerCase()) ) != null) {
+                    StringTokenizer st = new StringTokenizer (linea,", .!¡?¿\"0123456789-“”/_[]{#}&%$ç+*><-_;':|~½¬@=()\t\n\\"); 
                     while (st.hasMoreTokens () ) {
                             String s = st.nextToken();
                             Object o = mapaPalabras.get(s);
@@ -47,6 +48,14 @@ public class FichContPalabras {
             }
             pr.close ();
 
+		}
+		
+		private String limpiarCadena(String cadena) {
+			  
+			        cadena = Normalizer.normalize(cadena, Normalizer.Form.NFD);
+			        cadena = cadena.replaceAll("[\\p{InCombiningDiacriticalMarks}]", "");
+			        return cadena;
+			    
 		}
 
 }
