@@ -18,7 +18,7 @@ public class ListIt {
 	
 		private static Queue <File> colaFicheros=new ConcurrentLinkedQueue<File>();
 		private static FichContPalabras contadorWords=new FichContPalabras();
-		private static final String extensiones []= {"yaml","txt","java","cpp","c","html"};
+		private static final String extensiones []= {"yaml","txt","java","cpp","c","h","html","css","py","odt","docx"};
 		
 		private static void isDirectory(File fichero) {
             File [] listaFicheros = fichero.listFiles();
