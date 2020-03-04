@@ -1,3 +1,4 @@
+package codigo;
 /*
  * FichContPalabras.java
  * Contabiliza palabras contenidas en un fichero
@@ -21,7 +22,7 @@ public class FichContPalabras {
             String linea;
 
             while ( (linea = br.readLine () ) != null) {
-                    StringTokenizer st = new StringTokenizer (linea,", .!¡?¿\"123456789-/_[]{};':()"); 
+                    StringTokenizer st = new StringTokenizer (linea,", .!¡?¿\"123456789-/_[]{#}&%$ç+*><-_;':|~½¬=()\t\n"); 
                     while (st.hasMoreTokens () ) {
                             String s = st.nextToken();
                             Object o = mapaPalabras.get(s);

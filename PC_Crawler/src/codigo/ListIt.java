@@ -1,3 +1,4 @@
+package codigo;
 /*
  * ListIt.java
  * Imprime caracter�sticas de ficheros textuales
@@ -13,7 +14,7 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 
 import org.apache.commons.io.FilenameUtils;
 
-class ListIt {
+public class ListIt {
 	
 		private static Queue <File> colaFicheros=new ConcurrentLinkedQueue<File>();
 		private static FichContPalabras contadorWords=new FichContPalabras();
@@ -39,12 +40,8 @@ class ListIt {
 			}
 
 		}
-        public static void main (String [] args) throws Exception {
-                if (args.length<1) {
-                        System.out.println("ERROR. formato: >java ListIt nombre_archivo");
-                        return;
-                }
-                File fichero = new File(args[0]);
+        public static void analyze (String file) throws Exception {
+                File fichero = new File(file);
                 if (!fichero.exists() || !fichero.canRead()) {
                         System.out.println("No puedo leer " + fichero);
                         return;

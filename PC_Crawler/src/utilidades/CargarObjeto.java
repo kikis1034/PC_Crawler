@@ -1,3 +1,4 @@
+package utilidades;
 /*
  * CargarObjeto.java
  * Carga un objeto serializable en memoria previamente salvado en un fichero

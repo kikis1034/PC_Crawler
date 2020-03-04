@@ -1,7 +1,8 @@
+package utilidades;
 /*
  * SalvarObjeto.java
  * Salva un objeto serializable en un fichero
- * (i) FŽlix R. Rodr’guez, EPCC, Universidad de Extremadura, 2009
+ * (i) Fï¿½lix R. Rodrï¿½guez, EPCC, Universidad de Extremadura, 2009
  * http://madiba.unex.es/felix
  */
 
@@ -11,7 +12,7 @@ import java.util.*;
 public class SalvarObjeto {
         public static void main (String args[]) {
                 Hashtable h = new Hashtable();
-                h.put("String","Luis Rodr¡guez Dur n");
+                h.put("String","Luis Rodrï¿½guez Durï¿½n");
                 h.put("Integer",new Integer(2));
                 h.put("Double",new Double(0.96));
                 try {
