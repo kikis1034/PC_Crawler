@@ -22,8 +22,8 @@ public class FichContPalabras {
             BufferedReader br = new BufferedReader (new FileReader (ficheroEntrada));
             String linea;
             
-            while ( (linea = limpiarCadena(br.readLine() )) != null) {
-                    StringTokenizer st = new StringTokenizer (linea.toLowerCase(),", .!¡?¿\"0123456789-“”/_[]{#}&%$ç+*><-_;':|~½¬@=()\t\n\\"); 
+            while ( (linea = br.readLine() ) != null) {
+                    StringTokenizer st = new StringTokenizer (limpiarCadena(linea.toLowerCase()),", .!¡?¿\"0123456789-“”/_[]{#}&%$ç+*><-_;':|~½¬@=()\t\n\\"); 
                     while (st.hasMoreTokens () ) {
                             String s = st.nextToken();
                             Object o = mapaPalabras.get(s);
