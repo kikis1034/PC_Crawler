@@ -12,6 +12,10 @@ import codigo.ListIt;
 
 import javax.swing.JLabel;
 import java.awt.Color;
+import javax.swing.JTabbedPane;
+import javax.swing.JPanel;
+import java.awt.GridLayout;
+import javax.swing.JTextArea;
 
 public class VentanaPrincipal {
 
@@ -19,6 +23,8 @@ public class VentanaPrincipal {
 	private JTextField textField;
 	private String fileElegido;
 	private JLabel labelResultado;
+	private JTextField textfield_palabra;
+	private JButton btnbusqueda;
 
 	/**
 	 * Launch the application.
@@ -53,36 +59,82 @@ public class VentanaPrincipal {
 		frame.setResizable(false);
 		frame.getContentPane().setEnabled(false);
 		frame.setTitle("PC-Crawler");
-		frame.setBounds(100, 100, 521, 256);
+		frame.setBounds(100, 100, 523, 268);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane().setLayout(null);
+		frame.getContentPane().setLayout(new GridLayout(0, 1, 0, 0));
+		
+		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
+		frame.getContentPane().add(tabbedPane);
+		
+		JPanel panel_analisis = new JPanel();
+		tabbedPane.addTab("Análisis", null, panel_analisis, null);
+		panel_analisis.setLayout(null);
 		
 		JButton btnNewButton = new JButton("Elegir");
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				fileElegido=ElegirFichero.elegir();
-				if (!fileElegido.equals("")) textField.setText(fileElegido);
-			}
-		});
-		btnNewButton.setBounds(313, 75, 129, 27);
-		frame.getContentPane().add(btnNewButton);
+		btnNewButton.setBounds(379, 63, 98, 25);
+		panel_analisis.add(btnNewButton);
 		
 		textField = new JTextField();
+		textField.setBounds(25, 65, 342, 22);
+		panel_analisis.add(textField);
 		textField.setBackground(Color.WHITE);
 		textField.setEditable(false);
-		textField.setBounds(49, 75, 252, 28);
-		frame.getContentPane().add(textField);
 		textField.setColumns(10);
 		
 		JLabel lblEligeUnDirectorio = new JLabel("Elige un directorio o archivo:");
-		lblEligeUnDirectorio.setBounds(49, 48, 437, 15);
-		frame.getContentPane().add(lblEligeUnDirectorio);
+		lblEligeUnDirectorio.setBounds(28, 38, 202, 15);
+		panel_analisis.add(lblEligeUnDirectorio);
 		
 		JLabel lblEjecutarElAnlisis = new JLabel("Ejecutar el análisis:");
-		lblEjecutarElAnlisis.setBounds(172, 125, 160, 15);
-		frame.getContentPane().add(lblEjecutarElAnlisis);
+		lblEjecutarElAnlisis.setBounds(149, 111, 139, 15);
+		panel_analisis.add(lblEjecutarElAnlisis);
 		
 		JButton btnRun = new JButton("Run");
+		btnRun.setBounds(196, 142, 61, 25);
+		panel_analisis.add(btnRun);
+		
+		labelResultado = new JLabel("");
+		labelResultado.setBounds(113, 136, 0, 0);
+		panel_analisis.add(labelResultado);
+		
+		JPanel panel_busqueda = new JPanel();
+		tabbedPane.addTab("Búsqueda", null, panel_busqueda, null);
+		panel_busqueda.setLayout(null);
+		
+		textfield_palabra = new JTextField();
+		textfield_palabra.setBounds(23, 45, 356, 25);
+		textfield_palabra.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				btnbusqueda.doClick();
+			}
+		});
+		panel_busqueda.add(textfield_palabra);
+		textfield_palabra.setColumns(10);
+		
+		btnbusqueda = new JButton("Buscar");
+		btnbusqueda.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				//TODO: Acción buscar en el fichero. Controlar erroes
+			}
+		});
+		btnbusqueda.setBounds(390, 45, 102, 25);
+		panel_busqueda.add(btnbusqueda);
+		
+		JLabel lblIntroduceLaPalabra = new JLabel("Introduce la palabra que desees consultar:");
+		lblIntroduceLaPalabra.setBounds(23, 18, 335, 15);
+		panel_busqueda.add(lblIntroduceLaPalabra);
+		
+		JTextArea textArea_resultado = new JTextArea();
+		textArea_resultado.setEditable(false);
+		textArea_resultado.setBounds(23, 109, 469, 67);
+		panel_busqueda.add(textArea_resultado);
+		
+		JLabel lblResultado = new JLabel("Resultado:");
+		lblResultado.setBounds(23, 82, 102, 15);
+		panel_busqueda.add(lblResultado);
+		labelResultado.setVisible(false);
 		btnRun.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -98,13 +150,12 @@ public class VentanaPrincipal {
 				
 			}
 		});
-		btnRun.setBounds(172, 152, 129, 34);
-		frame.getContentPane().add(btnRun);
-		
-		labelResultado = new JLabel("");
-		labelResultado.setVisible(false);
-		labelResultado.setBounds(51, 192, 392, 15);
-		frame.getContentPane().add(labelResultado);
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				fileElegido=ElegirFichero.elegir();
+				if (!fileElegido.equals("")) textField.setText(fileElegido);
+			}
+		});
 	}
 	
 	public void resultadoError(String codigo) {
@@ -118,5 +169,4 @@ public class VentanaPrincipal {
 		labelResultado.setForeground(Color.green);
 		labelResultado.setText(codigo);
 	}
-	
 }
