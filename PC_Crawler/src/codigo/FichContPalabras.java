@@ -10,7 +10,7 @@ import java.io.*;
 import java.text.Normalizer;
 import java.util.*;
 
-public class FichContPalabras {
+public class FichContPalabras{
 	
 		private Map mapaPalabras;
 		
@@ -47,7 +47,29 @@ public class FichContPalabras {
                     pr.println (k + " : " + mapaPalabras.get (k));
             }
             pr.close ();
+            
+//            FileOutputStream fos = new FileOutputStream(ficheroSalida);
+//            ObjectOutputStream oos = new ObjectOutputStream(fos);
+//            oos.writeObject(mapaPalabras);
+//            oos.close();
+//            fos.close();
+		}
+		
+		
+		public void EscribirCuentaPalabra(String ficheroSalida, String palabra) throws IOException {
+			List claves = new ArrayList (mapaPalabras.keySet ());
+            Collections.sort (claves);
 
+            PrintWriter pr = new PrintWriter (new FileWriter (ficheroSalida));
+            Iterator i = claves.iterator ();
+            while (i.hasNext ()) {
+                    Object k = i.next ();
+                    if (k == palabra) {
+                    	pr.println (k + " : " + mapaPalabras.get (k));
+                    }
+            }
+            pr.close ();
+            
 		}
 		
 		private String limpiarCadena(String cadena) {
