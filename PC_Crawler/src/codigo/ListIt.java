@@ -61,26 +61,11 @@ public class ListIt {
             contadorWords.EscribirCuenta("salida.txt");
       }
         
-      public static void findWord (String file, String palabra) throws IOException {
-    	  File fichero = new File(file);
-    	  if (!fichero.exists() || !fichero.canRead()) {
-              System.out.println("No puedo leer " + fichero);
-              return;
-    	  }
-    	  if (fichero.isDirectory()) {
-          	isDirectory(fichero);
-          	Iterator<File> it=colaFicheros.iterator();
-          	while(it.hasNext()) {
-          		File ficheroActual=it.next();
-          		if (ficheroActual.isDirectory()) isDirectory(ficheroActual);
-          		else isArchivo(ficheroActual);
-          	}
-          }
-          else  {
-          	isArchivo(fichero);
-          }
-          contadorWords.EscribirCuentaPalabra("salida.txt", palabra);
+      public static int findWord (String file, String palabra) throws Exception {
     	  
+    	  analyze(file);
+    	  
+          return contadorWords.EscribirCuentaPalabra("salida.txt", palabra);
       }
 }
               

@@ -12,10 +12,10 @@ import java.util.*;
 
 public class FichContPalabras{
 	
-		private Map mapaPalabras;
+		private Map<String, Integer> mapaPalabras;
 		
 		public FichContPalabras() {
-			mapaPalabras=new TreeMap();
+			mapaPalabras=new TreeMap<String, Integer>();
 		}
 		
 		public void ContarPalabras(String ficheroEntrada) throws IOException {
@@ -56,20 +56,24 @@ public class FichContPalabras{
 		}
 		
 		
-		public void EscribirCuentaPalabra(String ficheroSalida, String palabra) throws IOException {
+		public int EscribirCuentaPalabra(String ficheroSalida, String palabra) throws IOException {
 			List claves = new ArrayList (mapaPalabras.keySet ());
             Collections.sort (claves);
 
             PrintWriter pr = new PrintWriter (new FileWriter (ficheroSalida));
+            
+            int contador = 0;
+            
             Iterator i = claves.iterator ();
             while (i.hasNext ()) {
                     Object k = i.next ();
                     if (k == palabra) {
-                    	pr.println (k + " : " + mapaPalabras.get (k));
+                    	contador =  mapaPalabras.get (k);
                     }
             }
             pr.close ();
             
+            return contador;
 		}
 		
 		private String limpiarCadena(String cadena) {
