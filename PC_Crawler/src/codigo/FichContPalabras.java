@@ -10,13 +10,17 @@ import java.io.*;
 import java.text.Normalizer;
 import java.util.*;
 
+import Objects.Info;
+import utilidades.CargarObjeto;
+import utilidades.SalvarObjeto;
+
 public class FichContPalabras{
 	
-		private Map<String, Integer> mapaPalabras;
+		private Map mapaPalabras;
 		private Map<String, Info> thesaurus;
 		
 		public FichContPalabras() {
-			mapaPalabras=new TreeMap<String, Integer>();
+			mapaPalabras=new TreeMap();
 			thesaurus = new TreeMap();
 		}
 		
@@ -38,8 +42,10 @@ public class FichContPalabras{
             }
             br.close ();
 		}
-		public void EscribirCuenta(String ficheroSalida) throws IOException {
-			List claves = new ArrayList (mapaPalabras.keySet ());
+		public void EscribirCuenta() throws IOException {
+			SalvarObjeto.salvarDiccionario((TreeMap) mapaPalabras);
+			CargarObjeto.cargarDiccionario();
+			/*List claves = new ArrayList (mapaPalabras.keySet ());
             Collections.sort (claves);
 
             PrintWriter pr = new PrintWriter (new FileWriter (ficheroSalida));
@@ -48,7 +54,7 @@ public class FichContPalabras{
                     Object k = i.next ();
                     pr.println (k + " : " + mapaPalabras.get (k));
             }
-            pr.close ();
+            pr.close ();*/
             
 //            FileOutputStream fos = new FileOutputStream(ficheroSalida);
 //            ObjectOutputStream oos = new ObjectOutputStream(fos);
@@ -58,7 +64,7 @@ public class FichContPalabras{
 		}
 		
 		
-		public int EscribirCuentaPalabra(String ficheroSalida, String palabra) throws IOException {
+	/*	public int EscribirCuentaPalabra(String ficheroSalida, String palabra) throws IOException {
 			List claves = new ArrayList (mapaPalabras.keySet ());
             Collections.sort (claves);
 
@@ -76,7 +82,7 @@ public class FichContPalabras{
             pr.close ();
             
             return contador;
-		}
+		}*/
 		
 		private String limpiarCadena(String cadena) {
 			  

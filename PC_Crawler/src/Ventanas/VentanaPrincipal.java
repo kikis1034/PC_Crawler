@@ -7,7 +7,10 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextField;
 
+import Objects.MetadataAnalisis;
+import utilidades.CargarObjeto;
 import utilidades.ElegirFichero;
+import utilidades.SalvarObjeto;
 import codigo.ListIt;
 
 import javax.swing.JLabel;
@@ -94,7 +97,7 @@ public class VentanaPrincipal {
 		panel_analisis.add(btnRun);
 		
 		labelResultado = new JLabel("");
-		labelResultado.setBounds(113, 136, 0, 0);
+		labelResultado.setBounds(28, 174, 455, 25);
 		panel_analisis.add(labelResultado);
 		
 		JPanel panel_busqueda = new JPanel();
@@ -143,7 +146,10 @@ public class VentanaPrincipal {
 				if (!fileElegido.equals(""))
 					try {
 						ListIt.analyze(fileElegido);
+						MetadataAnalisis meta = new MetadataAnalisis(fileElegido);
+						SalvarObjeto.salvarMetadata(meta);
 						resultadoCorrecto("Los archivos se han analizado correctamente");
+						CargarObjeto.cargarMetadata();
 					} catch (Exception e1) {
 						resultadoError("La ruta "+fileElegido+" no puede ser analizada");
 					}

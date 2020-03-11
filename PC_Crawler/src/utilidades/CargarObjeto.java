@@ -8,15 +8,35 @@ package utilidades;
 
 import java.io.*;
 import java.util.*;
+
+import Objects.MetadataAnalisis;
 //hola
 public class CargarObjeto {
-        public static void main (String args[]) {
+        public static TreeMap cargarDiccionario () {
                 try {
-                        FileInputStream fis = new FileInputStream("h.ser");
+                        FileInputStream fis = new FileInputStream("diccionario.txt");
                         ObjectInputStream ois = new ObjectInputStream(fis);
-                        Hashtable h = (Hashtable) ois.readObject();
-                        System.out.println(h.toString());
+                        TreeMap diccionario = (TreeMap) ois.readObject();
+                        System.out.println(diccionario);
+                        return diccionario;
                 }
-                catch (Exception e) { System.out.println(e); }
+                catch (Exception e) { 
+                	System.out.println(e); 
+                	return null;
+                }
         }
+        
+        public static MetadataAnalisis cargarMetadata () {
+            try {
+                    FileInputStream fis = new FileInputStream("metaAnalisis.txt");
+                    ObjectInputStream ois = new ObjectInputStream(fis);
+                    MetadataAnalisis meta = (MetadataAnalisis) ois.readObject();
+                    System.out.println(meta);
+                    return meta;
+            }
+            catch (Exception e) { 
+            	System.out.println(e); 
+            	return null;
+            }
+    }
 }

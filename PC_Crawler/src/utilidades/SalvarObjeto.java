@@ -9,17 +9,25 @@ package utilidades;
 import java.io.*;
 import java.util.*;
 
+import Objects.MetadataAnalisis;
+
 public class SalvarObjeto {
-        public static void main (String args[]) {
-                Hashtable h = new Hashtable();
-                h.put("String","Luis Rodríguez Durán");
-                h.put("Integer",new Integer(2));
-                h.put("Double",new Double(0.96));
+	
+        public static void salvarDiccionario (TreeMap diccionario) {   
                 try {
-                        FileOutputStream fos = new FileOutputStream("h.ser");
+                        FileOutputStream fos = new FileOutputStream("diccionario.txt");
                         ObjectOutputStream oos = new ObjectOutputStream(fos);
-                        oos.writeObject(h);
+                        oos.writeObject(diccionario);
                 }
                 catch (Exception e) { System.out.println(e); }
+        }
+        
+        public static void salvarMetadata (MetadataAnalisis meta) {
+            try {
+                FileOutputStream fos = new FileOutputStream("metaAnalisis.txt");
+                ObjectOutputStream oos = new ObjectOutputStream(fos);
+                oos.writeObject(meta);
+	        }
+	        catch (Exception e) { System.out.println(e); }
         }
 }

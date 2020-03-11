@@ -14,10 +14,12 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 
 import org.apache.commons.io.FilenameUtils;
 
+import Objects.MetadataAnalisis;
+
 public class ListIt {
 	
-		private static Queue <File> colaFicheros=new ConcurrentLinkedQueue<File>();
-		private static FichContPalabras contadorWords=new FichContPalabras();
+		private static Queue <File> colaFicheros;
+		private static FichContPalabras contadorWords;
 		private static final String extensiones []= {"yaml","txt","java","cpp","c","h","html","css","py","odt","docx"};
 		
 		private static void isDirectory(File fichero) {
@@ -46,6 +48,8 @@ public class ListIt {
                     System.out.println("No puedo leer " + fichero);
                     return;
             }
+            contadorWords=new FichContPalabras();
+            colaFicheros=new ConcurrentLinkedQueue<File>();
             if (fichero.isDirectory()) {
             	isDirectory(fichero);
             	Iterator<File> it=colaFicheros.iterator();
@@ -58,14 +62,15 @@ public class ListIt {
             else  {
             	isArchivo(fichero);
             }
-            contadorWords.EscribirCuenta("salida.txt");
+            contadorWords.EscribirCuenta();
+            MetadataAnalisis meta= new MetadataAnalisis("");
       }
         
-      public static int findWord (String file, String palabra) throws Exception {
-    	  
-    	  analyze(file);
-    	  
-          return contadorWords.EscribirCuentaPalabra("salida.txt", palabra);
-      }
+//      public static int findWord (String file, String palabra) throws Exception {
+//    	  
+//    	  analyze(file);
+//    	  
+//          return contadorWords.EscribirCuentaPalabra("salida.txt", palabra);
+//      }
 }
               
