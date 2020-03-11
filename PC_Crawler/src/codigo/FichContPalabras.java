@@ -13,9 +13,11 @@ import java.util.*;
 public class FichContPalabras{
 	
 		private Map<String, Integer> mapaPalabras;
+		private Map<String, Info> thesaurus;
 		
 		public FichContPalabras() {
 			mapaPalabras=new TreeMap<String, Integer>();
+			thesaurus = new TreeMap();
 		}
 		
 		public void ContarPalabras(String ficheroEntrada) throws IOException {
