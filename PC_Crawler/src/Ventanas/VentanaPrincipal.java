@@ -128,10 +128,12 @@ public class VentanaPrincipal {
 				textArea_resultado.setText("");
 				
 				if (ListIt.diccionario==null) {
-					textArea_resultado.setForeground(Color.RED);
+					
 					textArea_resultado.setText("Primero debes ejecutar el análisis");
+					textArea_resultado.setForeground(Color.RED);
 				}
 				else {
+					textArea_resultado.setForeground(Color.BLACK);
 					if (ListIt.diccionario.get(textfield_palabra.getText())!=null) {
 							textArea_resultado.setText("La palabra aparece: ");
 						 	StyledDocument doc = textArea_resultado.getStyledDocument();
