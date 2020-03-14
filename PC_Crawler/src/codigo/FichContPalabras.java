@@ -11,6 +11,7 @@ import java.text.Normalizer;
 import java.util.*;
 
 import Objects.Info;
+import Objects.MetadataAnalisis;
 import utilidades.CargarObjeto;
 import utilidades.SalvarObjeto;
 
@@ -42,50 +43,13 @@ public class FichContPalabras{
             }
             br.close ();
 		}
-		public void EscribirCuenta() throws IOException {
-			SalvarObjeto.salvarDiccionario((TreeMap) mapaPalabras);
-			CargarObjeto.cargarDiccionario();
-			/*List claves = new ArrayList (mapaPalabras.keySet ());
-            Collections.sort (claves);
-
-            PrintWriter pr = new PrintWriter (new FileWriter (ficheroSalida));
-            Iterator i = claves.iterator ();
-            while (i.hasNext ()) {
-                    Object k = i.next ();
-                    pr.println (k + " : " + mapaPalabras.get (k));
-            }
-            pr.close ();*/
-            
-//            FileOutputStream fos = new FileOutputStream(ficheroSalida);
-//            ObjectOutputStream oos = new ObjectOutputStream(fos);
-//            oos.writeObject(mapaPalabras);
-//            oos.close();
-//            fos.close();
+		public void EscribirCuenta(String file) throws IOException {
+			SalvarObjeto.salvarDiccionario(mapaPalabras);
+			MetadataAnalisis meta= new MetadataAnalisis(file);
+			SalvarObjeto.salvarMetadata(meta);
 		}
 		
-		
-	/*	public int EscribirCuentaPalabra(String ficheroSalida, String palabra) throws IOException {
-			List claves = new ArrayList (mapaPalabras.keySet ());
-            Collections.sort (claves);
-
-            PrintWriter pr = new PrintWriter (new FileWriter (ficheroSalida));
-            
-            int contador = 0;
-            
-            Iterator i = claves.iterator ();
-            while (i.hasNext ()) {
-                    Object k = i.next ();
-                    if (k == palabra) {
-                    	contador =  mapaPalabras.get (k);
-                    }
-            }
-            pr.close ();
-            
-            return contador;
-		}*/
-		
-		private String limpiarCadena(String cadena) {
-			  
+		private String limpiarCadena(String cadena) {		  
 			        cadena = Normalizer.normalize(cadena, Normalizer.Form.NFD);
 			        cadena = cadena.replaceAll("[\\p{InCombiningDiacriticalMarks}]", "");
 			        return cadena;

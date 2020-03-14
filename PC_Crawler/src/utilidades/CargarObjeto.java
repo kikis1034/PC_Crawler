@@ -12,12 +12,11 @@ import java.util.*;
 import Objects.MetadataAnalisis;
 //hola
 public class CargarObjeto {
-        public static TreeMap cargarDiccionario () {
+        public static Map cargarDiccionario () {
                 try {
                         FileInputStream fis = new FileInputStream("diccionario.txt");
                         ObjectInputStream ois = new ObjectInputStream(fis);
-                        TreeMap diccionario = (TreeMap) ois.readObject();
-                        System.out.println(diccionario);
+                        Map diccionario = (Map) ois.readObject();
                         return diccionario;
                 }
                 catch (Exception e) { 
@@ -31,12 +30,12 @@ public class CargarObjeto {
                     FileInputStream fis = new FileInputStream("metaAnalisis.txt");
                     ObjectInputStream ois = new ObjectInputStream(fis);
                     MetadataAnalisis meta = (MetadataAnalisis) ois.readObject();
-                    System.out.println(meta);
                     return meta;
             }
             catch (Exception e) { 
             	System.out.println(e); 
             	return null;
             }
+            
     }
 }

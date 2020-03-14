@@ -6,6 +6,7 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextField;
+import javax.swing.JTextPane;
 
 import Objects.MetadataAnalisis;
 import utilidades.CargarObjeto;
@@ -19,6 +20,10 @@ import javax.swing.JTabbedPane;
 import javax.swing.JPanel;
 import java.awt.GridLayout;
 import javax.swing.JTextArea;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.Style;
+import javax.swing.text.StyleConstants;
+import javax.swing.text.StyledDocument;
 
 public class VentanaPrincipal {
 
@@ -28,6 +33,7 @@ public class VentanaPrincipal {
 	private JLabel labelResultado;
 	private JTextField textfield_palabra;
 	private JButton btnbusqueda;
+	private JTextPane textArea_resultado; 
 
 	/**
 	 * Launch the application.
@@ -119,7 +125,35 @@ public class VentanaPrincipal {
 		btnbusqueda = new JButton("Buscar");
 		btnbusqueda.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				//TODO: Acción buscar en el fichero. Controlar erroes
+				textArea_resultado.setText("");
+				
+				if (ListIt.diccionario==null) {
+					textArea_resultado.setForeground(Color.RED);
+					textArea_resultado.setText("Primero debes ejecutar el análisis");
+				}
+				else {
+					if (ListIt.diccionario.get(textfield_palabra.getText())!=null) {
+							textArea_resultado.setText("La palabra aparece: ");
+						 	StyledDocument doc = textArea_resultado.getStyledDocument();
+						    Style style = textArea_resultado.addStyle("I'm a Style", null);
+						    StyleConstants.setForeground(style, Color.green);
+						    StyleConstants.setBold(style, true);
+
+						    try {
+								doc.insertString(doc.getLength(), Integer.toString((Integer)ListIt.diccionario.get(textfield_palabra.getText())), style);
+							} catch (BadLocationException e) {}
+
+						    StyleConstants.setForeground(style, Color.black);
+						    StyleConstants.setBold(style, false);
+
+						    try {
+								doc.insertString(doc.getLength(), " veces", style);
+							} catch (BadLocationException e) {}
+						
+					}
+					else textArea_resultado.setText("Esta palabra no existe");
+				}
+				
 			}
 		});
 		btnbusqueda.setBounds(390, 45, 102, 25);
@@ -129,7 +163,7 @@ public class VentanaPrincipal {
 		lblIntroduceLaPalabra.setBounds(23, 18, 335, 15);
 		panel_busqueda.add(lblIntroduceLaPalabra);
 		
-		JTextArea textArea_resultado = new JTextArea();
+		textArea_resultado = new JTextPane();
 		textArea_resultado.setEditable(false);
 		textArea_resultado.setBounds(23, 109, 469, 67);
 		panel_busqueda.add(textArea_resultado);
@@ -145,11 +179,10 @@ public class VentanaPrincipal {
 				labelResultado.setText("");
 				if (!fileElegido.equals(""))
 					try {
-						ListIt.analyze(fileElegido);
-						MetadataAnalisis meta = new MetadataAnalisis(fileElegido);
-						SalvarObjeto.salvarMetadata(meta);
-						resultadoCorrecto("Los archivos se han analizado correctamente");
-						CargarObjeto.cargarMetadata();
+						int retorno=ListIt.analyze(fileElegido);
+						if (retorno==0) resultadoCorrecto("Los archivos se han analizado correctamente");
+						if (retorno==1) resultadoCorrecto("La ruta ya se ha analizado hace menos de 10 minutos");
+						if (retorno==-1) resultadoError("La ruta "+fileElegido+" no puede ser analizada");
 					} catch (Exception e1) {
 						resultadoError("La ruta "+fileElegido+" no puede ser analizada");
 					}

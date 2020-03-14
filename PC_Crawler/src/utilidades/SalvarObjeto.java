@@ -13,7 +13,7 @@ import Objects.MetadataAnalisis;
 
 public class SalvarObjeto {
 	
-        public static void salvarDiccionario (TreeMap diccionario) {   
+        public static void salvarDiccionario (Map diccionario) {   
                 try {
                         FileOutputStream fos = new FileOutputStream("diccionario.txt");
                         ObjectOutputStream oos = new ObjectOutputStream(fos);
