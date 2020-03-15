@@ -14,13 +14,6 @@ public class Info {
 	ArrayList<String> sinonimos;
 	
 	
-	//Hacer que no lea espacios en blanco, ni "(fig)" y otras cadenas entre paréntesis. 
-	//La separación es por ';'. Saltarse los comentarios (empiezan por #).
-	
-	public void limpiarFichero() {
-		
-	}
-	
 	// Inserta en el arrayList sinonimos la lista de los sinonimos de la palabra insertada por parámetro
 	public void completarSinonimos(String token) {
 		
@@ -35,8 +28,11 @@ public class Info {
         String linea = "";
         
         try {
-			while ((linea= br.readLine())!=null) {
+			while ((linea= br.readLine())!=null && linea.startsWith("#")) {  // linea no es null ni es un comentarop (comienza por #)
 				if(linea.equalsIgnoreCase(token)) {
+					
+					linea.replaceAll("\\(\\w+\\)","");  // quitar anotaciones entre paréntesis
+					linea.replaceAll(",",";");  // cambiar ',' por ';'
 					
 					String[] candidatos = linea.split(";");
 					
