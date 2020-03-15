@@ -31,7 +31,7 @@ public class Info {
 			while ((linea= br.readLine())!=null && linea.startsWith("#")) {  // linea no es null ni es un comentarop (comienza por #)
 				if(linea.equalsIgnoreCase(token)) {
 					
-					linea.replaceAll("\\(\\w+\\)","");  // quitar anotaciones entre paréntesis
+					linea.replaceAll("\\(\\w+\\)","");  // eliminar anotaciones entre paréntesis
 					linea.replaceAll(",",";");  // cambiar ',' por ';'
 					
 					String[] candidatos = linea.split(";");
