@@ -179,7 +179,7 @@ public class VentanaPrincipal {
 			public void actionPerformed(ActionEvent e) {
 				labelResultado.setVisible(false);
 				labelResultado.setText("");
-				if (!fileElegido.equals(""))
+				if (!fileElegido.equals("")){
 					try {
 						int retorno=ListIt.analyze(fileElegido);
 						if (retorno==0) resultadoCorrecto("Los archivos se han analizado correctamente");
@@ -188,6 +188,9 @@ public class VentanaPrincipal {
 					} catch (Exception e1) {
 						resultadoError("La ruta "+fileElegido+" no puede ser analizada");
 					}
+				}
+				else resultadoError("Debe especificar una ruta");
+
 				
 			}
 		});

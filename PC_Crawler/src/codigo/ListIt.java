@@ -85,7 +85,7 @@ public class ListIt {
 			boolean actualizado=false;
 			MetadataAnalisis metaActual=new MetadataAnalisis(file);
 			MetadataAnalisis meta=CargarObjeto.cargarMetadata();
-            if (meta.getDirectorio().equals(metaActual.getDirectorio())) {
+            if (meta!=null&&meta.getDirectorio().equals(metaActual.getDirectorio())) {
             	 long minutes = meta.getUltimoAnalisis().until( metaActual.getUltimoAnalisis(), ChronoUnit.MINUTES );
             	 if (minutes>10) actualizado=false;
             	 else actualizado=true;
