@@ -11,7 +11,7 @@ import java.util.ArrayList;
 
 public class Info {
 
-	ArrayList<String> sinonimos;
+	ArrayList<String> sinonimos = new ArrayList<String>();
 	
 	
 	// Inserta en el arrayList sinonimos la lista de los sinonimos de la palabra insertada por parámetro
@@ -28,7 +28,7 @@ public class Info {
         String linea = "";
         
         try {
-			while ((linea= br.readLine())!=null && linea.startsWith("#")) {  // linea no es null ni es un comentarop (comienza por #)
+			while ((linea= br.readLine())!=null && linea.startsWith("#")) {  // linea no es null ni es un comentario (comienza por #)
 				if(linea.equalsIgnoreCase(token)) {
 					
 					linea.replaceAll("\\(\\w+\\)","");  // eliminar anotaciones entre paréntesis

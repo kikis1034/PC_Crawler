@@ -9,8 +9,10 @@ package codigo;
 import java.io.*;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.Map;
 import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedQueue;
@@ -57,14 +59,23 @@ public class ListIt {
                         return -1;
                 }
                 contadorWords=new FichContPalabras();
-                colaFicheros=new ConcurrentLinkedQueue<File>();
+                colaFicheros=new LinkedList<File>();
+                
                 if (fichero.isDirectory()) {
                 	isDirectory(fichero);
-                	Iterator<File> it=colaFicheros.iterator();
-                	while(it.hasNext()) {
-                		File ficheroActual=it.next();
-                		if (ficheroActual.isDirectory()) isDirectory(ficheroActual);
-                		else isArchivo(ficheroActual);
+
+                	while(colaFicheros.size()>0) {
+                		
+                		File ficheroActual = colaFicheros.poll();
+                		
+                		if (ficheroActual.isDirectory()) {
+                			
+                			isDirectory(ficheroActual);
+                			
+                		}
+                		else {
+                			isArchivo(ficheroActual);
+                		}
                 	}
                 }
                 else  {
@@ -94,5 +105,13 @@ public class ListIt {
             
 			return actualizado;
 		}
+		
+//		public static void mostrarColaFicheros () {
+//			System.out.println("Mostrando cola de ficheros...");
+//			ArrayList<File> listaFicheros = new ArrayList(colaFicheros);
+//			for (int i=0 ; i<listaFicheros.size() ; i++) {
+//				System.out.println(listaFicheros.get(i));
+//			}
+//		}
 }
               
