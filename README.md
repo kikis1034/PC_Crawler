@@ -52,4 +52,5 @@ https://en.wikipedia.org/wiki/Web_crawler
 https://es.ryte.com/wiki/Crawler
 ## Blogs
 Gonzalo: https://madiba.unex.es/ribw1920/a06/
+
 kike: https://madiba.unex.es/ribw1920/a13/
