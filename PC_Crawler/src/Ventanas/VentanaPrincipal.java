@@ -8,10 +8,7 @@ import java.awt.event.ActionEvent;
 import javax.swing.JTextField;
 import javax.swing.JTextPane;
 
-import Objects.MetadataAnalisis;
-import utilidades.CargarObjeto;
 import utilidades.ElegirFichero;
-import utilidades.SalvarObjeto;
 import codigo.ListIt;
 
 import javax.swing.JLabel;
@@ -19,7 +16,6 @@ import java.awt.Color;
 import javax.swing.JTabbedPane;
 import javax.swing.JPanel;
 import java.awt.GridLayout;
-import javax.swing.JTextArea;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.Style;
 import javax.swing.text.StyleConstants;

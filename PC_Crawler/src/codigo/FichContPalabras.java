@@ -12,17 +12,14 @@ import java.util.*;
 
 import Objects.Info;
 import Objects.MetadataAnalisis;
-import utilidades.CargarObjeto;
 import utilidades.SalvarObjeto;
 
 public class FichContPalabras{
 	
 		private Map mapaPalabras;
-		private Map<String, Info> thesaurus;
 		
-		public FichContPalabras() {
-			mapaPalabras=new TreeMap();
-			thesaurus = new TreeMap();
+		public FichContPalabras() {		
+			mapaPalabras=Thesauro.cargarThesauro();
 		}
 		
 		public void ContarPalabras(String ficheroEntrada) throws IOException {
@@ -34,8 +31,7 @@ public class FichContPalabras{
                     while (st.hasMoreTokens () ) {
                             String s = st.nextToken();
                             Object o = mapaPalabras.get(s);
-                            if (o == null) mapaPalabras.put (s, new Integer (1));
-                            else {
+                            if (o != null){
                                     Integer cont = (Integer) o;
                                     mapaPalabras.put (s, new Integer (cont.intValue () + 1));
                             }

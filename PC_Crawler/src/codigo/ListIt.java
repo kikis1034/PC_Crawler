@@ -7,21 +7,16 @@ package codigo;
  */
 
 import java.io.*;
-import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Map;
 import java.util.Queue;
-import java.util.concurrent.ConcurrentLinkedQueue;
 
 import org.apache.commons.io.FilenameUtils;
 
 import Objects.MetadataAnalisis;
 import utilidades.CargarObjeto;
-import utilidades.SalvarObjeto;
 
 public class ListIt {
 		
