@@ -104,7 +104,7 @@ public class ListIt {
 		}
 		
 		
-		public Map resultadoAnalisis() {
+		public static Map resultadoAnalisis() {
 			
 			Map<String, Integer> mapaResultado = new TreeMap<String, Integer>();
 			
