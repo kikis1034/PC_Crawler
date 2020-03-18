@@ -13,6 +13,7 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Map;
 import java.util.Queue;
+import java.util.TreeMap;
 
 import org.apache.commons.io.FilenameUtils;
 
@@ -103,15 +104,18 @@ public class ListIt {
 		}
 		
 		
-		public void resultadoAnalisis() {
+		public Map resultadoAnalisis() {
+			
+			Map<String, Integer> mapaResultado = new TreeMap<String, Integer>();
 			
 			Iterator it = contadorWords.mapaPalabras.keySet().iterator();
 			while(it.hasNext()){
 				String key = (String) it.next();
-				if (contadorWords.mapaPalabras.get(key) > 0) {
-					System.out.println(key + " : " + contadorWords.mapaPalabras.get(key));
+				if (contadorWords.mapaPalabras.get(key) > 0) { 
+					mapaResultado.put(key, contadorWords.mapaPalabras.get(key));
 				}
 			}
+			return mapaResultado;
 		}
 		
 //		public static void mostrarColaFicheros () {
