@@ -100,6 +100,7 @@ public class VentanaPrincipal {
 			public void actionPerformed(ActionEvent arg0) {
 				fileElegido=ElegirFichero.elegir();
 				if (!fileElegido.equals("")) textField.setText(fileElegido);
+				else fileElegido=textField.getText();
 			}
 		});
 		//Este textField muestra al usuario la ruta elegida
