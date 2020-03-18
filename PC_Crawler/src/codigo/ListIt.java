@@ -9,6 +9,7 @@ package codigo;
 import java.io.*;
 import java.time.temporal.ChronoUnit;
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Map;
 import java.util.Queue;
@@ -99,6 +100,18 @@ public class ListIt {
             else actualizado=false;
             
 			return actualizado;
+		}
+		
+		
+		public void resultadoAnalisis() {
+			
+			Iterator it = contadorWords.mapaPalabras.keySet().iterator();
+			while(it.hasNext()){
+				String key = (String) it.next();
+				if (contadorWords.mapaPalabras.get(key) > 0) {
+					System.out.println(key + " : " + contadorWords.mapaPalabras.get(key));
+				}
+			}
 		}
 		
 //		public static void mostrarColaFicheros () {

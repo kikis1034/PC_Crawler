@@ -9,6 +9,8 @@ import java.util.Map;
 import java.util.TreeMap;
 
 public class Thesauro {
+	
+	
 	public static Map cargarThesauro() {
 		Map mapaAceptables= new TreeMap();
 		BufferedReader br = null;

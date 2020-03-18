@@ -16,7 +16,7 @@ import utilidades.SalvarObjeto;
 
 public class FichContPalabras{
 	
-		private Map mapaPalabras;
+		public Map<String, Integer> mapaPalabras;
 		
 		public FichContPalabras() {		
 			mapaPalabras=Thesauro.cargarThesauro();
