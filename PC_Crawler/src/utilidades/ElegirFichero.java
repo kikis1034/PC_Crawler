@@ -4,11 +4,7 @@ import javax.swing.JFileChooser;
 public class ElegirFichero{
 
 	/**
-	 * Launch the application.
-	 */
-
-	/**
-	 * Create the dialog.
+	 * Crea un JFileChooser y devuelve la ruta elegida
 	 */
 
 	public static String elegir() {

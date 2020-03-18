@@ -1,9 +1,7 @@
 package codigo;
-/*
- * ListIt.java
- * Imprime caracter�sticas de ficheros textuales
- * (c) F�lix R. Rodr�guez, EPCC, Universidad de Extremadura, 2009
- * http://madiba.unex.es/felix
+/**
+ * @author kike y Gonzalo
+ * Esta clase contienen métodos relacionados con el análisis de una ruta específica
  */
 
 import java.io.*;
@@ -22,11 +20,19 @@ import utilidades.CargarObjeto;
 
 public class ListIt {
 		
-		public static Map diccionario;
+		//Diccionario en el que se encuentran las palabras:String y su frecuencia:Integer
+		public static Map <String,Integer>diccionario;
+		//Cola de ficheros que se irá recorriendo en el análisis
 		private static Queue <File> colaFicheros;
+		//Clase que actualiza el diccionario y que contiene los métodos relacionados con la cuenta de palabras en los fichero
 		private static FichContPalabras contadorWords;
+		//Lista de extensiones de archivos permitidas en el análisis.
 		private static final String extensiones []= {"yaml","txt","java","cpp","c","h","html","css","py","odt","docx","js","json","xml"};
 		
+		/**
+		 * Si un file es un directorio entra en esta clase
+		 * @param fichero: Ruta del file
+		 */
 		private static void isDirectory(File fichero) {
             File [] listaFicheros = fichero.listFiles();
             for (int i=0; i<listaFicheros.length; i++) {
@@ -34,9 +40,14 @@ public class ListIt {
             }              
 		}
 		
-		private static void isArchivo(File fichero) throws IOException {
+		/**
+		 * Si un file es archivo entra en esta clase 
+		 * @param fichero: Ruta del archivo
+		 */
+		private static void isArchivo(File fichero){
 			try {
 				String extension=FilenameUtils.getExtension(fichero.getPath());
+				//Comprueba que el archivo tiene una extensión válida y si es así cuenta las palabras aceptables
 				if(Arrays.asList(extensiones).contains(extension)) {
 					contadorWords.ContarPalabras(fichero.getPath());
 				}
@@ -48,14 +59,20 @@ public class ListIt {
 
 		}
         public static int analyze (String file) throws Exception {
+        	//Si ocurre cualquierexcepción no controlada
         	int retorno=-1;
+        	//Comprueba si el diccioanrio actual está actualizado
         	if (!actualizado(file)) {
                 File fichero = new File(file);
                 if (!fichero.exists() || !fichero.canRead()) {
                         System.out.println("No puedo leer " + fichero);
                         return -1;
                 }
-                contadorWords=new FichContPalabras();
+                //Cargams el Thesauro con las palabras aceptables y con frecuencia 0
+                diccionario=Thesauro.cargarThesauro();
+                //Creamos una clase contador yle pasamos el diccionario para que lo actualice a medida que cuenta las palabras
+                contadorWords=new FichContPalabras(diccionario);
+                //Inicializamos la cola de ficheros
                 colaFicheros=new LinkedList<File>();
                 
                 if (fichero.isDirectory()) {
@@ -83,12 +100,19 @@ public class ListIt {
         	}
         	else {
         		retorno=1;
+        		//Si el diccionario ya esta cargado, ya que no se ha cerrado el programa, mantenemos la variable
+        		if (diccionario==null) diccionario=CargarObjeto.cargarDiccionario();
         	}
-        	diccionario=CargarObjeto.cargarDiccionario();  
+        	
         	return retorno;
         	
       }
-
+        
+        /**
+         * Comprueba si el análisis último se ha hecho sobre el mismo directorio y hace menos de 10 minutos
+         * @param file: Ruta sobre la que se va a hacer el análisis
+         * @return boolean
+         */
 		private static boolean actualizado(String file) {
 			boolean actualizado=false;
 			MetadataAnalisis metaActual=new MetadataAnalisis(file);
@@ -103,16 +127,18 @@ public class ListIt {
 			return actualizado;
 		}
 		
-		
+		/**
+		 * Devuelve el resultado del último análisis. Es decir, las palabras que tienen una frecuencia mayor a cero.
+		 */
 		public static Map resultadoAnalisis() {
 			
 			Map<String, Integer> mapaResultado = new TreeMap<String, Integer>();
 			
-			Iterator it = contadorWords.mapaPalabras.keySet().iterator();
+			Iterator it = diccionario.keySet().iterator();
 			while(it.hasNext()){
 				String key = (String) it.next();
-				if (contadorWords.mapaPalabras.get(key) > 0) { 
-					mapaResultado.put(key, contadorWords.mapaPalabras.get(key));
+				if (diccionario.get(key) > 0) { 
+					mapaResultado.put(key, diccionario.get(key));
 				}
 			}
 			return mapaResultado;

@@ -5,11 +5,15 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
-
+/**
+ * Actualmente esta clase no sirve para nada
+ * @author kike
+ *
+ */
 
 
 public class Info {
-
+/*
 	ArrayList<String> sinonimos = new ArrayList<String>();
 	
 	
@@ -46,5 +50,5 @@ public class Info {
         
         
         
-	}
+	}*/
 }

@@ -1,10 +1,4 @@
 package codigo;
-/*
- * FichContPalabras.java
- * Contabiliza palabras contenidas en un fichero
- * (i) Félix R. Rodríguez, EPCC, Universidad de Extremadura, 2009
- * http://madiba.unex.es/felix
- */
 
 import java.io.*;
 import java.text.Normalizer;
@@ -13,24 +7,37 @@ import java.util.*;
 import Objects.Info;
 import Objects.MetadataAnalisis;
 import utilidades.SalvarObjeto;
-
+/**
+ * Clase que contiene los métodos relacioandos con contar las pallabras aceptables
+ * @author kike
+ *
+ */
 public class FichContPalabras{
-	
-		public Map<String, Integer> mapaPalabras;
+		//Apunta a la misma dirección que el diccionario de ListIt
+		private Map mapaPalabras;
 		
-		public FichContPalabras() {		
-			mapaPalabras=Thesauro.cargarThesauro();
+		/**
+		 * Constructor parametrizado inicializa el mapa que ira actualizando a medida que cuenta laspalabras de los ficheros
+		 * @param diccionario
+		 */
+		public FichContPalabras(Map diccionario) {
+			mapaPalabras=diccionario;
 		}
-		
+		/**
+		 * Cuenta las palabras de un fichero y actualiza el mapa
+		 * @param ficheroEntrada
+		 * @throws IOException
+		 */
 		public void ContarPalabras(String ficheroEntrada) throws IOException {
             BufferedReader br = new BufferedReader (new FileReader (ficheroEntrada));
             String linea;
             
             while ( (linea = br.readLine() ) != null) {
-                    StringTokenizer st = new StringTokenizer (limpiarCadena(linea.toLowerCase()),", .!¡?¿\"0123456789-“”/_[]{#}&%$ç+*><-_;':|~½¬@=()\t\n\\"); 
+                    StringTokenizer st = new StringTokenizer (limpiarCadena(linea.toLowerCase()),", .!¡?¿\"0123456789-“”/_[]{#}&%$ç+*><-_;':|~½¬@=()\t\n\\");//Elimina carácteres especiales, puntuación y número 
                     while (st.hasMoreTokens () ) {
                             String s = st.nextToken();
                             Object o = mapaPalabras.get(s);
+                            //Solo actualiza la frecuencia de las palabras aceptables que hemos cargado con el Thesauro
                             if (o != null){
                                     Integer cont = (Integer) o;
                                     mapaPalabras.put (s, new Integer (cont.intValue () + 1));
@@ -39,13 +46,23 @@ public class FichContPalabras{
             }
             br.close ();
 		}
+		/**
+		 * Salva el diccionario y los metadatos del análisis
+		 * @param file
+		 * @throws IOException
+		 */
 		public void EscribirCuenta(String file) throws IOException {
 			SalvarObjeto.salvarDiccionario(mapaPalabras);
 			MetadataAnalisis meta= new MetadataAnalisis(file);
 			SalvarObjeto.salvarMetadata(meta);
 		}
 		
-		private String limpiarCadena(String cadena) {		  
+		/**
+		 * Limpia una cadena de símbolos diacríticos
+		 * @param cadena
+		 * @return
+		 */
+		private static String limpiarCadena(String cadena) {		  
 			        cadena = Normalizer.normalize(cadena, Normalizer.Form.NFD);
 			        cadena = cadena.replaceAll("[\\p{InCombiningDiacriticalMarks}]", "");
 			        return cadena;

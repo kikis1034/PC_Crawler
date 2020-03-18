@@ -1,9 +1,7 @@
 package utilidades;
-/*
- * SalvarObjeto.java
- * Salva un objeto serializable en un fichero
- * (i) F�lix R. Rodr�guez, EPCC, Universidad de Extremadura, 2009
- * http://madiba.unex.es/felix
+
+/**
+ * Clase para salvar objetos de memoria a un fichero de texto
  */
 
 import java.io.*;
@@ -12,7 +10,10 @@ import java.util.*;
 import Objects.MetadataAnalisis;
 
 public class SalvarObjeto {
-	
+		/**
+		 * Salva un Mapa en un fichero
+		 * @param diccionario
+		 */
         public static void salvarDiccionario (Map diccionario) {   
                 try {
                         FileOutputStream fos = new FileOutputStream("diccionario.txt");
@@ -21,7 +22,10 @@ public class SalvarObjeto {
                 }
                 catch (Exception e) { System.out.println(e); }
         }
-        
+		/**
+		 * Salva una instancia de la clase MetadataAnalisis en un fichero
+		 * @param diccionario
+		 */
         public static void salvarMetadata (MetadataAnalisis meta) {
             try {
                 FileOutputStream fos = new FileOutputStream("metaAnalisis.txt");

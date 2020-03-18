@@ -3,8 +3,15 @@ package Objects;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
+/**
+ * Modelo que guarda los metadatos del análisis.
+ * @author kike
+ *
+ */
 public class MetadataAnalisis implements Serializable {
+	//Directorio del análisis
 	private String directorio;
+	//Ultima actualización del análisis
 	private LocalDateTime ultimoAnalisis;
 	
 	public MetadataAnalisis(String directorio) {

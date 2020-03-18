@@ -1,17 +1,19 @@
 package utilidades;
-/*
- * CargarObjeto.java
- * Carga un objeto serializable en memoria previamente salvado en un fichero
- * (i) Félix R. Rodríguez, EPCC, Universidad de Extremadura, 2009
- * http://madiba.unex.es/felix
- */
 
 import java.io.*;
 import java.util.*;
 
 import Objects.MetadataAnalisis;
-//hola
+/**
+ * Clase para cargar objetos serializables en memoria
+ * @author kike
+ *
+ */
 public class CargarObjeto {
+		/**
+		 * Carga un Mapa en memoria a partir de un fichero.
+		 * @return
+		 */
         public static Map cargarDiccionario () {
                 try {
                         FileInputStream fis = new FileInputStream("diccionario.txt");
@@ -24,7 +26,10 @@ public class CargarObjeto {
                 	return null;
                 }
         }
-        
+        /**
+         * Carga una instancia de MetadataAnalisis en memoria a partir de un fichero
+         * @return
+         */
         public static MetadataAnalisis cargarMetadata () {
             try {
                     FileInputStream fis = new FileInputStream("metaAnalisis.txt");
