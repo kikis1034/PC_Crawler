@@ -4,11 +4,16 @@ import java.io.*;
 import java.text.Normalizer;
 import java.util.*;
 
+import org.apache.commons.io.FilenameUtils;
+import org.apache.tika.exception.TikaException;
+import org.xml.sax.SAXException;
+
+import AnalisisLexico.HerramientasTika;
 import Objects.Info;
 import Objects.MetadataAnalisis;
 import utilidades.SalvarObjeto;
 /**
- * Clase que contiene los métodos relacioandos con contar las pallabras aceptables
+ * Clase que contiene los métodos relacioandos con contar las palabras aceptables
  * @author kike
  *
  */
@@ -27,24 +32,23 @@ public class FichContPalabras{
 		 * Cuenta las palabras de un fichero y actualiza el mapa
 		 * @param ficheroEntrada
 		 * @throws IOException
+		 * @throws TikaException 
+		 * @throws SAXException 
 		 */
-		public void ContarPalabras(String ficheroEntrada) throws IOException {
-            BufferedReader br = new BufferedReader (new FileReader (ficheroEntrada));
-            String linea;
-            
-            while ( (linea = br.readLine() ) != null) {
-                    StringTokenizer st = new StringTokenizer (limpiarCadena(linea.toLowerCase()),", .!¡?¿\"0123456789-“”/_[]{#}&%$ç+*><-_;':|~½¬@=()\t\n\\");//Elimina carácteres especiales, puntuación y número 
-                    while (st.hasMoreTokens () ) {
-                            String s = st.nextToken();
-                            Object o = mapaPalabras.get(s);
-                            //Solo actualiza la frecuencia de las palabras aceptables que hemos cargado con el Thesauro
-                            if (o != null){
-                                    Integer cont = (Integer) o;
-                                    mapaPalabras.put (s, new Integer (cont.intValue () + 1));
-                            }
-                    }
-            }
-            br.close ();
+		public void ContarPalabras(String ficheroEntrada) throws IOException, SAXException, TikaException {
+			String extension=FilenameUtils.getExtension(ficheroEntrada);
+
+	        String contenido=HerramientasTika.leerArchivo(ficheroEntrada);
+	        StringTokenizer st = new StringTokenizer (limpiarCadena(contenido.toLowerCase()),", .!¡?¿\"0123456789-“”/_[]{#}&%$ç+*><-_;':|~½¬@=()\t\n\\");//Elimina carácteres especiales, puntuación y número 
+	        while (st.hasMoreTokens () ) {
+	        	String s = st.nextToken();
+	            Object o = mapaPalabras.get(s);
+	            //Solo actualiza la frecuencia de las palabras aceptables que hemos cargado con el Thesauro
+	            if (o != null){
+	                Integer cont = (Integer) o;
+	                mapaPalabras.put (s, new Integer (cont.intValue () + 1));
+	            }
+	         }
 		}
 		/**
 		 * Salva el diccionario y los metadatos del análisis
