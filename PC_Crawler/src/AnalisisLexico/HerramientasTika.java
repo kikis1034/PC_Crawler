@@ -36,7 +36,6 @@ public class HerramientasTika {
 		ParseContext pcontext = new ParseContext();
 		//Parser genérico
 		AutoDetectParser parser=new AutoDetectParser();
-		PDFParser pdfparser=new PDFParser();
 		parser.parse(inputStream,handler,metadata,pcontext);
 		//Devuelve el contenido del archivo
 		return handler.toString();
