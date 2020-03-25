@@ -27,7 +27,7 @@ public class ListIt {
 		//Clase que actualiza el diccionario y que contiene los métodos relacionados con la cuenta de palabras en los fichero
 		private static FichContPalabras contadorWords;
 		//Lista de extensiones de archivos permitidas en el análisis.
-		private static final String extensiones []= {"yaml","txt","java","cpp","c","h","html","css","py","odt","docx","js","json","xml","pdf","doc","xlsx","xls","xml","odf"};
+		private static final String extensiones []= {"yaml","txt","java","cpp","c","h","html","css","py","odt","docx","js","json","xml","pdf","doc","xlsx","xls","xml"};
 		
 		/**
 		 * Si un file es un directorio entra en esta clase
